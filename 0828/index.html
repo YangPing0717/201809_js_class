@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>裡面可以包含的標籤</title>
+
+    <link rel="stylesheet" href="./style.css">
+    <script src="//unpkg.com/vue/dist/vue.js"></script>
+    <script src="//unpkg.com/element-ui@2.4.6/lib/index.js"></script>
+    <style>
+        body{
+            font-family: Microsoft JhengHei;
+        }
+        .title{
+            color: #c70000;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <form action="form_action.php" method="post">
+        <label for="">帳號</label><input type="email" id="email" /> <br>
+        <label for="">密碼</label><input type="password" id="password" /> <br>
+        <input type="submit" value="Submit" />
+    </form>
+
+    <label for="gender">gender</label>
+    <input type="radio" name="gender" value="male" checked>male
+    <input type="radio" name="gender" value="female">female <br>
+    <input type="submit" value="Submit" />
+
+    <p>
+        <textarea id="mag" rows="10" style="width: 100%" placeholder="textarea"></textarea>
+    </p>
+
+
+    <div id="app">
+        <template>
+            <el-table :data="tableData" border style="width: 100%">
+                <el-table-column prop="date" label="日期" width="180">
+                </el-table-column>
+                <el-table-column prop="name" label="姓名" width="180">
+                </el-table-column>
+                <el-table-column prop="address" label="地址">
+                </el-table-column>
+            </el-table>
+        </template>
+    </div>
+
+    <script>
+        var Main = {
+    data() {
+      return {
+        tableData: [{
+          date: '2016-05-02',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          date: '2016-05-04',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1517 弄'
+        }, {
+          date: '2016-05-01',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1519 弄'
+        }, {
+          date: '2016-05-03',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1516 弄'
+        }]
+      }
+    }
+  }
+var Ctor = Vue.extend(Main)
+new Ctor().$mount('#app')
+    </script>
+
+
+    <!-- 佔據一行的空間 -->
+    <a href="#Lorem" target="_blank">JS-304期</a>
+    <div><img src="./images/bertrand-zuchuat-641-unsplash.jpg" alt="" width="300" height="auto"></div>
+
+    <h1 class="title">佔據一行的空間</h1>
+    <h3 class="title">佔據一行的空間佔據一行的空間</h3>
+
+    <section>佔據一行的空間佔據一行的空間
+        <ol>
+            <li>data1</li>
+            <li>data2</li>
+            <li>data3</li>
+        </ol>
+    </section>
+    <div>
+        <label for="name">name</label><br />
+        <input type="text" id="name">
+    </div>
+    <p id="Lorem">Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, ratione quis. Placeat eos distinctio
+        fugit
+        accusantium laudantium odit. Optio cupiditate ducimus est provident quia doloremque iure nisi qui. Harum,
+        dolore repellat eligendi vel recusandae doloribus aut error vitae optio possimus adipisci quidem placeat ea
+        voluptas praesentium. Dolorem eligendi recusandae odio corporis? Vero, quaerat velit! Molestias neque repellat
+        itaque vel recusandae facilis fugiat, quo aut maiores exercitationem repudiandae perferendis, delectus veniam
+        saepe harum corporis iusto natus, enim voluptatibus nulla minus quam inventore odit. Aperiam praesentium
+        suscipit nisi facere consectetur aliquid repellat inventore, deserunt ab, esse veniam, at adipisci. Autem illum
+        consequuntur magni deserunt itaque, reiciendis nemo temporibus possimus quia repellat odio facere animi quasi a
+        necessitatibus enim! Animi blanditiis neque, eveniet repellat veritatis doloribus facilis consequuntur est
+        temporibus quaerat ut, ab obcaecati dicta doloremque odit aperiam. Sit, hic doloremque ex quas quia,
+        consequuntur fuga officia corrupti culpa corporis odit accusantium ipsum soluta voluptas a cumque repellat,
+        laborum asperiores nobis earum quidem? Saepe, beatae iste quam illum dignissimos blanditiis. Fugit illo
+        voluptatem tenetur doloribus earum, beatae ipsam! Tempora explicabo sapiente, voluptas aliquam deleniti nemo
+        quae error doloribus perferendis labore autem nisi suscipit obcaecati ad quaerat modi sit quidem provident
+        soluta ea amet debitis. Quasi blanditiis odio quos excepturi, eius officia sapiente magni nesciunt! Beatae
+        rerum commodi delectus provident. Dicta repudiandae dolore nisi doloribus et illum, nihil a saepe eveniet quas
+        ullam, sint</p>
+
+
+
+</body>
+
+</html>
