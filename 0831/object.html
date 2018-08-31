@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>object</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <script>
+        var student = {
+            name: "Elsa Lin",
+            id: "B12345678",
+            birthday: "02-12",
+            contact: { // 物件裡可以再包物件
+                phone: "0988123456",
+                email: "abc@gmail.com",
+            },
+            sayHi: function () {
+                console.log('Hello ' + this.name)
+            }
+        };
+        console.log(student.contact.phone);
+        student.sayHi();
+    </script>
+
+    <script>
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #elsa {
+            width: 200px;
+            position: absolute;
+            top: 300px;
+            left: 300px;
+            /* transform: translate(-50%, -50%); */
+        }
+    </style>
+</head>
+
+<body>
+
+    <img src="./images/Elsa.jpg" alt="" id="elsa">
+    <p>艾莎 Elsa
+        <span id="c_posi">0</span>
+    </p>
+    <label for="dis_input">move how many</label><br>
+    <input type="number" name="" id="dis_input">
+    <button id="move_btn">move_btn</button>
+
+    <script>
+        var posi = 0;
+        var img = document.getElementById('elsa');
+        var posiSpan = document.getElementById('c_posi');
+        var keyinput = document.getElementById('dis_input')
+        var btn = document.getElementById('move_btn')
+
+        btn.addEventListener('click', moveTo);
+
+        function moveTo() {
+            var distance = parseInt(keyinput.value);
+            // console.log(distance, typeof distance);
+            posi = posi + distance;
+            posiSpan.innerText = posi;
+            img.style.left = posi + 'px';
+            keyinput.value = '';
+        }
+    </script>
+
+
+
+</body>
+
+</html>
