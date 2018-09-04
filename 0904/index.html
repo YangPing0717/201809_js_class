@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    var student1 = {
+        name: "Elsie",
+        gender: 'Female',
+        id: "B12345678",
+        birthday: "02-12",
+        contact: {
+            phone: "0988123456",
+            email: "abc@gmail.com"
+        },
+        sayHello: function () {
+            document.write("My name is ", typeof this.name);
+        }
+    };
+    console.log(student1.contact);
+    console.log(student1.contact['email'])
+
+    // var products = {
+    //     iphone7 = 123456,
+    //     iphone8 = 564789
+    // }
+    // var target = 'iphone7';
+    // console.log(products[target]);
+
+        console
+    
+    // 定義模板
+    function Student(name, id, birth, phone, email){
+        this.name = name;
+        this.id = id;
+        this.birth = birth || 07 - 07;
+        this.contact = {
+            phone: phone,
+            email: email,
+        };
+    }
+    Student.prototype.sayHello = function(){
+        console.log("Hello, ", this.name, "!")
+    }
+    var s1 = new Student('olive', '456789123', '07-07', '456789123', '07-07');
+    console.log(s1);
+    s1.sayHello();
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>練習題_輸入框_加總與平均</title>
+    <script src="./jquery-3.3.1.js"></script>
+</head>
+<body>
+    
+<input type="number" id="primaryincome" placeholder="0">
+<input type="number" id="otherincome" placeholder="0">
+<input type="number" id="totalamountremaining" placeholder="0" readonly>
+<button id="calculate" type="button">calculate</button>
+<script>
+    $("#calculate").click(function () {
+        var primaryincome = $("#primaryincome").val();
+        var otherincome = $("#otherincome").val();
+        var totalincome = parseInt(primaryincome) + parseInt(otherincome);
+        alert(totalincome);
+        $("#totalamountremaining").val(totalincome);
+    }) 
+</script>
+
+<br><br>
+
+講師版本 <br>
+<input type="number" id="s1">
+<input type="number" id="s2">
+<input type="number" id="s3">
+<button id="submit">PLUS</button>
+<p>TOTAL: <span id="total">0</span></p>
+<p>AVERAGE: <span id="average">0</span></p>
+
+<script>
+    var s1 = document.getElementById('s1');
+    var s2 = document.getElementById('s2');
+    var s3 = document.getElementById('s3');
+    var btn = document.getElementById('submit');
+    var total = document.getElementById('total');
+    var avg = document.getElementById('average');
+
+    btn.addEventListener('click', calcu);
+    function calcu(){
+        var s1v = parseInt(s1.value);
+        var s2v = parseInt(s2.value);
+        var s3v = parseInt(s3.value);
+        var totalScore = s1v + s2v + s3v;
+        var avgScore = totalScore / 3;
+        
+        // 取到小數點二位，以下兩法皆可
+        // var fixAverageScore = Math.floor(avgScore * 100)/ 100;
+        var fixAverageScore = avgScore.toFixed(2)
+        
+        // total.innerHTML = totalScore + ' Score'; // 結果同下行
+        total.innerHTML = `${totalScore} Score`;
+        avg.innerHTML = fixAverageScore + ' Score';
+
+    }
+</script>
+    
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+
+
+<script>
+    var num = 8;
+    if(num % 2 == 0){  // 除二後榆樹是否為 0 是否被整除
+        console.log(num + ' 是偶數')
+    }else{
+        console.log(num + ' 不是偶數')
+    }
+    /* jshint esversion:6 */   // 如果有安裝外掛 jshint，去掉綠色小漂符號
+    // 三元運算子   
+    // 等同上方 if else 寫法，簡易判斷寫法
+    var result = (num % 2 == 0)?`${num} 是偶數`:`${num} 不是偶數`; 
+    console.log(result);
+</script>
+
+<script>
+    if (num % 2 == 0) {
+        if(num>10){
+            console.log()
+        }else{
+
+        }
+    }
+
+</script>
+
+<script>
+    function xxx(){
+
+    }
+    var xxx = function(){
+
+    }
+</script>
+
+<script>
+    var weekendPlan = function (isParentVisiting, weather, isRich) {
+        var plan;
+        if(isParentVisiting){
+            plan = "去購物";
+        }else{
+           if(weather == 'rainy'){
+               plan = "待在家";
+           }else if(weather == 'sunny'){
+               plan = "打網球";
+           }else{
+               if(isRich){
+                  plan = "去購物"; 
+               }else{
+                    plan = "待在家"; 
+               }
+           }
+        }
+        return plan;
+    };
+    console.log(weekendPlan(true, "rainy", true)); // 應為 "去購物"
+    console.log(weekendPlan(false, "windy", false)); // 應為 "待在家"
+</script>
+
+
+</body>
+</html>
