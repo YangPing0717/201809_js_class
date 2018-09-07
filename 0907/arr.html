@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>array</title>
+</head>
+<body>
+
+
+<script>
+var colors = ["Red", "Green", "Blue"];
+console.log(colors.length)
+console.log(colors[0])
+colors[0] = 'black'
+console.log(colors);
+
+// 2 維陣列
+var arr2d = [[1,2,3], [4,5,6], [7,8,9], [1,2,3,4,5,6]];
+// console.log(arr2d[1][2]) // 抓出第二個陣列裡的第三個數為何
+var table = [];
+for(var row = 0; row < 4; row++){
+    table[row] = [];
+    for (var col = 0; col < 4; col++){
+        table[row][col] = '(' + row + ',' + col + ')';
+    }
+}
+console.log(table);
+
+
+var colors = ["Red", "Green", "Blue"];
+for(var i=0; i < colors.length; i++){  // 不用寫死到底幾筆資料，看資料有多長 i 就跑多長
+
+}
+
+
+</script>
+</body>
+</html>

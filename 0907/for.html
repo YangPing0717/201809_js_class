@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+有規則重複做的事情，就用 for 迴圈
+<!-- <script>
+    var total = 0;
+    for (var index = 1; index <= 10; index++) {
+        // 數到號碼的時候，要做的事情
+        // total = total + index;
+        total += index;
+    }
+    console.log(total)
+</script> -->
+
+while 迴圈
+<!-- <script>
+    var i = 1;
+    var sum = 0;
+    while (i <= 10) {
+        sum += i;
+        i++;
+    }
+</script> -->
+
+<!-- <script>
+    var i = 0;
+    while (i <= 10) {
+    if (i == 5) {
+        break;
+    }
+    console.log(i)
+    i++;
+    }
+</script> -->
+
+
+
+
+
+小試身手:猜數字遊戲
+<script>
+//隨機取整數
+// for(var i=0; i<10; i++){
+//     console.log(Math.floor(Math.random()));
+// }
+
+
+// var str = '1234';
+// var check = str.indexOf('4'); // 字串中的 1 在第幾位，0位 1位 2位 3位
+// console.log(check); // 第 5 位沒有東西，顯示 -1
+// console.log(str[2]); // 第 2 位是誰
+// console.log(str.length) // 字串有多長，字串有幾個
+</script>
+
+<br><br>
+<input type="number" id="num">
+<button id="btn">check</button>
+<p id="resultbox"></p>
+
+<script>
+var ranNum = '';
+// 當字串裡還沒有四個數字，就執行以下迴圈  
+// 出題目
+while(ranNum.length < 4){
+    // 隨機娶一個 0-9 整數
+    var result = Math.floor(Math.random()*10);
+    // 如果沒有重複就放進 ranNum
+    if(ranNum.indexOf(result) == -1){
+        ranNum += result;
+    }
+}
+console.log(ranNum);  // 驗證題目有沒有成功
+
+var num = document.getElementById('num');
+var btn = document.getElementById('btn');
+var resultbox = document.getElementById('resultbox');
+
+// 使用者點擊對答案，btn 監聽事件
+btn.addEventListener('click', checkNum);
+
+function checkNum(){
+    var inputVal = num.value;
+    // console.log(inputVal);  // 檢查是否可以拿到 input 數字
+    var a = 0;
+    var b = 0;
+    for(var i = 0; i<4; i++){
+        if(inputVal[i] == ranNum[i]){
+            a++;
+        }else{
+            // 如果位置不對，但有出現在題目裡
+            if(ranNum.indexOf(inputVal[i]) != -1){
+                b++;
+            }
+        }
+    }
+var finalresult = a + 'A' + b + 'B'; 
+// console.log(finalresult);
+// var finalresult;  // 沒寫完，看 T CODE
+// if(){
+
+// }
+resultbox.innerHTML = finalresult;
+}
+
+</script>
+
+</body>
+</html>
