@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+        .highlight{
+            background: #000;
+            color: #fff;
+        }
+    </style>
+
+</head>
+<body>
+<button id="btn">clickMeAddLi</button>
+<!-- <button class="clickMe">deleteMe</button> -->
+<ul id="list">
+    <li>item1 <button class="deleteMe">deleteMe</button></li>
+    <li>item2 <button class="deleteMe">deleteMe</button></li>
+    <li>item3 <button class="deleteMe">deleteMe</button></li>
+</ul>
+<script>
+$(function(){
+    $('#btn').click(function(){
+        var $li = $('<li>');  // 建立一個 li 裝進 $li 裡
+        $li.html('動態新增元素 <button class="deleteMe">deleteMe</button>');  // 產生內容
+        $li.appendTo('#list');  // 內容塞進容器裡
+        $('#list').append($li); // 
+    })
+    $('.deleteMe').click(function(){  // 網頁載入時就發生，所以後來產生的 btn 沒作用
+        $(this).parent().remove()  // 移除點擊的父層 就是 li
+    })
+    // 刪除 後來產生的 btn 另外寫  // 寫完下面這段，33, 34 行即可省略了
+    // 找到包所有 btn 的祖先層標籤，就是 #list，點按找到 .deleteMe 群
+    $("#list").on("click", '.deleteMe', function(){
+        $(this).parent().remove()
+    });  
+})
+</script>
+
+<p>Lorem ipsum dolor sit, amet <span>consectetur adipisicing elit.</span> Nisi, numquam?</p>
+<p id="aa">Lorem ipsum dolor sit, amet <span>consectetur adipisicing elit.</span> Nisi, numquam?</p>
+<script>
+$(function(){
+    $('p').click(function(){
+        $('#aa > span').toggleClass('highlight');
+    })
+})
+</script>
+
+<input type="radio" name="color" value="red">red
+<input type="radio" name="color" value="blue">blue
+<input type="radio" name="color" value="green">green<br>
+<button id="submitBtn">submitBtn</button>
+
+<label for="color">請選擇一種顏色</label>
+<input type="radio" name="color" value="Red">紅色
+<input type="radio" name="color" value="Green">綠色
+<input type="radio" name="color" value="Blue">藍色
+<button id="submit-btn">送出</button>
+
+
+
+
+<br><br>
+<input type="checkbox" name="colors" value="red">red
+<input type="checkbox" name="colors" value="blue">blue
+<input type="checkbox" name="colors" value="green">green<br>
+<button id="submitBtnColors">submitBtn</button>
+
+<script>
+$(function(){
+    // radio
+    $('#submitBtn').click(function(){
+        var selectedColor = $('input[name=color]').val();
+        alert(selectedColor)
+    })
+    // checkbox
+    $('#submitBtnColors').click(function(){
+        var boxArr = [];
+        $('input[name=colors]:checked').each(function(){
+            boxArr.push($(this).val());
+        });
+        alert(boxArr)
+    })
+})
+
+</script>
+</body>
+</html>
