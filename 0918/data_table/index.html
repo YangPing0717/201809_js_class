@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://bootswatch.com/4/cosmo/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+    <div class="col-5">
+        
+    <div class="form-group">
+        <label class="col-form-label" for="inputDefault">name</label>
+        <input type="text" class="form-control" placeholder="Default input" id="name">
+      </div>
+
+      <div class="form-group">
+        <label class="col-form-label" for="inputDefault">phone</label>
+        <input type="text" class="form-control" placeholder="Default input" id="phone">
+      </div>
+
+      <div class="form-group">
+        <label class="col-form-label" for="inputDefault">email</label>
+        <input type="text" class="form-control" placeholder="Default input" id="email">
+      </div>
+      <button type="button" class="btn btn-primary" id="btn">btn</button>
+      <button type="button" class="btn btn-primary" id="btn_update">btn_update</button>
+</div>
+
+<div class="col-7">
+  <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">name</th>
+      <th scope="col">phone</th>
+      <th scope="col">email</th>
+      <th scope="col">O-X</th>
+
+    </tr>
+  </thead>
+  <tbody id="data_tbody">
+  </tbody>
+</table>
+
+</div>
+
+</div></div>
+
+
+    
+
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-firestore.js"></script>    
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyDkeO-ywPcDPQIunJpZH_QZcIywrXf1IZI",
+        authDomain: "js-database-yp.firebaseapp.com",
+        databaseURL: "https://js-database-yp.firebaseio.com",
+        projectId: "js-database-yp",
+        storageBucket: "js-database-yp.appspot.com",
+        messagingSenderId: "881495885653"
+      };
+    firebase.initializeApp(config);
+    const db = firebase.firestore();
+    db.settings({
+	timestampsInSnapshots: true
+    });
+    </script>
+
+<script>
+$(function(){
+  // 新增資料
+  $('#btn').click(function(){
+    var data = {
+      name: $('#name').val(),
+      phone: $('#phone').val(),
+      email: $('#email').val()
+    };
+    console.log(data);
+
+    // 存放資料庫
+    db.collection('contacts').add(data)
+  
+    .then(function (docRef) {
+    console.log("Document written with ID: ", docRef.id);
+    alert('data OK!')
+    })
+    .catch(function (error) {
+    console.error("Error adding document: ", error);
+    });
+  })
+
+//讀取資料
+db.collection("contacts")  // contacts 資藥庫裡建的名稱
+	.onSnapshot(function (docs) {  // .get().then 被 .onSnapshot 取代 即時更新資料
+  $('#data_tbody').html(); // 先清空容器 再放入更新的資料
+		docs.forEach(function (doc) {
+	  	//操作每筆讀取出來的資料...
+      var data = doc.data();  // 用 data 這個方法將資料拿出來
+      // console.log(data);  // 檢查是否拿到資料
+      // console.log(doc.id);
+
+      // 將資料放進表格
+      var template = `<tr id='${doc.id}'>
+      <td>${data.name}</td>
+      <td>${data.phone}</td>
+      <td>${data.email}</td>
+      <td><i class="fas fa-edit" class='editbtn'></i>
+      <i class="fas fa-trash-alt" class=delbtn'></i></td>
+    </tr>`;
+    $('#data_tbody').append(template);
+		});
+	});
+
+  // 編輯刪除 btn
+
+
+
+
+})
+</script>
+</body>
+</html>
