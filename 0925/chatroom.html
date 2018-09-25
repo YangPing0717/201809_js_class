@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        html, body{
+            margin: 0;
+            padding: 0;
+        }
+        .hidden{
+            display: none;
+        }
+        .chatwindow{
+            padding: 20px;
+        }
+        #chats{
+            height: 300px;
+            list-style: none;
+        }
+        #chats li{
+
+        }
+        #typingStatus{
+            height: 20px;;
+        }
+        #typingStatus p{
+            margin-bottom: 0;
+        }
+        #username{
+            margin-right: 8px;
+        }
+        #userphoto{
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }  
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Chatroom</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <img src="" alt="" id="userphoto"><span id="username"></span>
+      </li>
+      <li class="nav-item">
+        <button class="btn btn-outline-primary" type="button" id="login">login</button>
+      </li>
+      <li class="nav-item">
+        <button class="btn btn-outline-success hidden" type="button" id="logout">logout</button>
+    </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+  <div class="col-6">
+      <div id="chatwindow" class="border border-primary chatwindow">
+        <ul id="chats">
+        </ul>
+        <div id="typingStatus">
+            <p id="typing" class="hidden">someone is typing...</p>
+        </div>
+      </div>
+
+      <div class="form-inline mt-2">
+        <input type="text" class="form-control " id="input" placeholder="Enter Text">
+        <button class="btn btn-outline-primary" type="button" id="send"><i class="fas fa-paper-plane"></i></button>
+    </div>
+    <div class="custom-file mt-2">
+        <input type="file" class="custom-file-input" id="uploadimg">
+        <label class="custom-file-label" for="uploadimg">Choose file</label>
+    </div>
+  </div>
+
+
+  <div class="col-6"></div>
+</div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-firestore.js"></script> 
+<script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-auth.js"></script>  // 登入功能
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyDkeO-ywPcDPQIunJpZH_QZcIywrXf1IZI",
+        authDomain: "js-database-yp.firebaseapp.com",
+        databaseURL: "https://js-database-yp.firebaseio.com",
+        projectId: "js-database-yp",
+        storageBucket: "js-database-yp.appspot.com",
+        messagingSenderId: "881495885653"
+      };
+    firebase.initializeApp(config);
+    const db = firebase.firestore();
+    db.settings({
+	timestampsInSnapshots: true
+    });
+</script>
+<script>
+$(function(){
+    var currentUser;
+    var chatRef = db.collection('chatrooms').doc('chatroom')  // firebase 裡 database 的路近
+    // 定義登入供應商
+    var provider = new firebase.auth.GoogleAuthProvider();
+    // 點按登入 btn 
+    $('#login').click(function(){
+        firebase.auth().signInWithPopup(provider).then(function (result) {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        var token = result.credential.accessToken;
+        // The signed-in user info.
+        var user = result.user;
+        }).catch(function (error) {
+        console.log(error);
+        });
+    })
+    
+    // 登出
+    $('#logout').click(function(){
+        firebase.auth().signOut().then(function () {
+        // Sign-out successful.
+        }).catch(function (error) {
+            // An error happened.
+        });
+    })
+   
+    // 登入登出監控狀態
+    firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+        // User is signed in.
+        console.log(user) // 測試是否抓到 user 資料
+        $('#login').addClass('hidden');
+        $('#logout').removeClass('hidden');
+        $('#userphoto').attr('src', user.photoURL);
+        $('#username').text(user.displayName);
+
+        // 監控 input 有沒有人在打字
+        $('#input').on('input', function(){
+            if($('#typing').val() !=''){
+                chatRef.update({
+                    typing: true
+                });
+            }else{
+                chatRef.update({
+                    typing: false
+                });
+            }
+
+            // 游標離開 input 時
+            $('#input').focusout(function(){
+                chatRef.update({
+                    typing: false
+                });
+            })
+
+            // 監控資料庫 typing 欄位
+            chatRef.onSnapShot(function(doc){
+                var chatroom = doc.data();
+                if(chatroom.typing){
+                    $('#typing').removeClass('hidden')
+                }else{
+                    $('#typing').addClass('hidden')
+                }
+            })
+
+        })
+    } else {
+        // No user is signed in.
+        $('#login').removeClass('hidden');
+        $('#logout').addClass('hidden');
+        $('#userphoto').attr('src', '');  // 清空
+        $('#username').text('');  // 清空
+    }
+    });
+
+
+
+
+
+})
+</script> 
+</body>
+</html>
