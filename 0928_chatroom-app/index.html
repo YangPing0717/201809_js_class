@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chatroom</title>
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://bootswatch.com/4/minty/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Chatroom</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor03">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <!-- 放使用者大頭貼&名字 -->
+                    <img src="" alt="" id="user-photo"><span id="user-name"></span>
+                </li>
+                <li class="nav-item">
+                    <!-- 登入按鈕 -->
+                    <button type="button" class="btn btn-secondary" id="login-btn">登入</button>
+                </li>
+                <li class="nav-item">
+                    <!-- 登出按鈕 -->
+                    <button type="button" class="btn btn-secondary hidden" id="logout-btn">登出</button>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+
+    <div class="container mt-3">
+        <div class="row justify-content-center">
+            <div class="col-6">
+                <!-- 聊天視窗 -->
+                <div id="chat-window">
+                    <!-- 聊天訊息的清單 -->
+                    <ul id="chats">
+
+                    </ul>
+                    <!-- 打字狀態 -->
+                    <div id="typing-status">
+                        <p id="typing" class="hidden">Someone is typing...</p>
+                    </div>
+                </div>
+                <!-- 文字輸入框 -->
+                <div class="form-inline">
+                    <input type="text" class="form-control" placeholder="你想說的話.." id="message-input">
+                    <button type="button" class="btn btn-outline-primary" id="send-btn"><i class="fas fa-paper-plane"></i></button>
+                </div>
+                <!-- 圖片選擇 -->
+                <div class="form-group mt-2">
+                    <div class="input-group mb-3">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="img-input">
+                            <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/5.5.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.0/firebase-storage.js"></script>
+
+
+    <!-- <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCl1IsLiCHvTqtOy5yklRag2KXWWJAgTTY",
+            authDomain: "js-304-elsie.firebaseapp.com",
+            databaseURL: "https://js-304-elsie.firebaseio.com",
+            projectId: "js-304-elsie",
+            storageBucket: "js-304-elsie.appspot.com",
+            messagingSenderId: "1007507406550"
+        };
+        firebase.initializeApp(config);
+        const db = firebase.firestore();
+        db.settings({
+            timestampsInSnapshots: true
+        });
+    </script> -->
+    <script>
+        // Initialize Firebase
+        var config = {
+          apiKey: "AIzaSyDkeO-ywPcDPQIunJpZH_QZcIywrXf1IZI",
+          authDomain: "js-database-yp.firebaseapp.com",
+          databaseURL: "https://js-database-yp.firebaseio.com",
+          projectId: "js-database-yp",
+          storageBucket: "js-database-yp.appspot.com",
+          messagingSenderId: "881495885653"
+        };
+      firebase.initializeApp(config);
+      const db = firebase.firestore();
+      db.settings({
+        timestampsInSnapshots: true
+      });
+      const storage = firebase.storage();
+    </script>
+    <script src="./index.js"></script>
+</body>
+
+</html>
